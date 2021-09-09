@@ -1,0 +1,47 @@
+
+
+
+
+<div>
+
+  <div class="top-mobile-toolbar">
+    <div class="weekly-view-button">
+      <button mat-icon-button><mat-icon>arrow</mat-icon></button>
+    </div>
+
+    <div *ngIf="currentFormattedDate | async as date" class="formatted-date">
+      {{date.currentMonth}}/{{date.dateOfMonth}}/{{date.currentYear}}
+    </div>
+  </div>
+
+
+
+  <div class="clocked-time-information">
+
+    <mat-card>
+      <mat-card-content>
+        <div class="daily-grid">
+          <div class="project-row">Prj <div></div></div>
+          <div class="project-row">JobCode <div></div></div>
+          <div class="project-row">PayCode <div></div></div>
+          <div class="project-row">In <div></div></div>
+          <div class="project-row">Out <div></div></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+
+  <div class="bottom-mobile-toolbar">
+
+    <div class="addToCurrentDay-button">
+      <button mat-raised-button (click)="addToDay()">
+        Add to this day
+      </button>
+    </div>
+
+  </div>
+
+</div>
+

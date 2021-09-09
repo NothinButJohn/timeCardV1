@@ -2,16 +2,19 @@
 
 
 
-<div>
+<div class="daily-view-container">
 
   <div class="top-mobile-toolbar">
-    <div class="weekly-view-button">
-      <button mat-icon-button><mat-icon>arrow</mat-icon></button>
+    <div class="top-mobile-toolbar-topHalf">
+      <div class="weekly-view-button">
+        <button mat-icon-button><mat-icon>arrow_back_ios_new</mat-icon></button>
+      </div>
+
+      <div *ngIf="currentFormattedDate | async as date" class="formatted-date">
+        {{date.currentMonth}}/{{date.dateOfMonth}}/{{date.currentYear}}
+      </div>
     </div>
 
-    <div *ngIf="currentFormattedDate | async as date" class="formatted-date">
-      {{date.currentMonth}}/{{date.dateOfMonth}}/{{date.currentYear}}
-    </div>
   </div>
 
 
@@ -21,12 +24,15 @@
     <mat-card>
       <mat-card-content>
         <div class="daily-grid">
-          <div class="project-row">Prj <div></div></div>
-          <div class="project-row">JobCode <div></div></div>
-          <div class="project-row">PayCode <div></div></div>
-          <div class="project-row">In <div></div></div>
-          <div class="project-row">Out <div></div></div>
+          <div class="">Prj </div>
+          <div class="">JobCode </div>
+          <div class="">PayCode </div>
+          <div class="">In </div>
+          <div class="">Out </div>
+
+
         </div>
+
       </mat-card-content>
     </mat-card>
 
@@ -34,12 +40,14 @@
 
 
   <div class="bottom-mobile-toolbar">
-
-    <div class="addToCurrentDay-button">
-      <button mat-raised-button (click)="addToDay()">
-        Add to this day
-      </button>
+    <div class="bottom-mobile-toolbar-half">
+      <div class="addToCurrentDay-button">
+        <button mat-raised-button (click)="addToDay()">
+          Add to this day
+        </button>
+      </div>
     </div>
+
 
   </div>
 

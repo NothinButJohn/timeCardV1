@@ -1,0 +1,61 @@
+
+
+
+@media(min-width: 370px){
+
+  .daily-view-container{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(25%, 1fr));
+    grid-auto-rows: auto;
+    grid-template-rows: repeat(6, 1fr);
+    height: 100%;
+    .top-mobile-toolbar{
+      grid-area: 1/1/2/5;
+      display: grid;
+      grid-template-rows: repeat(2,1fr);
+      grid-template-columns: repeat(4, 1fr);
+      .top-mobile-toolbar-topHalf{
+        grid-area: 1/1/2/5;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background-color: lightskyblue;
+        .weekly-view-button{
+          grid-area: 1/1/2/2;
+        }
+        .formatted-date{
+          grid-area: 1/2/2/3;
+        }
+      }
+
+    }
+
+    .clocked-time-information{
+      grid-area: 3/1/4/5;
+      .daily-grid{
+        display: grid;
+        grid-template-columns: repeat(5, minmax(8.33%, 1fr));
+        grid-template-rows: auto;
+      }
+    }
+   .bottom-mobile-toolbar{
+     grid-area: 6/1/7/5;
+     display: grid;
+     grid-template-rows: repeat(2, 1fr);
+     grid-template-columns: repeat(4, 1fr);
+     .bottom-mobile-toolbar-half{
+       grid-area: 2/1/3/5;
+       background-color: lightskyblue;
+       .addToCurrentDay-button{
+
+       }
+     }
+
+
+   }
+  }
+
+
+
+}
+
+

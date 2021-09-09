@@ -1,0 +1,30 @@
+
+<div *ngIf="currentFormattedDate | async as date" class="formatted-date">
+  {{date.currentMonth}}/{{date.dateOfMonth}}/{{date.currentYear}}
+</div>
+
+<div>
+  <form>
+    <mat-form-field>
+      <input matInput type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text">
+    </mat-form-field>
+
+    <div>
+      <button color="warn" mat-raised-button>
+        cancel
+      </button>
+      <button mat-raised-button>
+        submit
+      </button>
+    </div>
+  </form>
+</div>

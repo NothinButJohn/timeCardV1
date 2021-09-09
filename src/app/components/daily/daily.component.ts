@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import * as dateFns from 'date-fns';
 import {Observable, of} from "rxjs";
+import {MatDialog, MatDialogClose, MatDialogConfig, MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-daily',
@@ -9,7 +10,7 @@ import {Observable, of} from "rxjs";
 })
 export class DailyComponent implements OnInit {
   currentFormattedDate: Observable<any>;
-  constructor() {
+  constructor(private matDialog: MatDialog) {
     this.currentFormattedDate = of(this.processCurrentDate());
     console.log("current date, processed through dateFns: ", this.currentFormattedDate)
   }
@@ -36,9 +37,26 @@ export class DailyComponent implements OnInit {
   }
 
   addToDay(){
-
+    let mdc = new MatDialogConfig()
+    mdc.width = '250px';
+    mdc.height = '400px';
+    mdc.data = this.currentFormattedDate;
+    this.matDialog.open(AddToCurrentDayDialog, mdc)
   }
 }
 
+@Component({
+  selector: 'addToCurrDayDialog',
+  templateUrl: './addToCurrDayDialog.component.html',
+  styleUrls: ['./daily.component.scss']
+})
+export class AddToCurrentDayDialog implements OnInit {
+  currentFormattedDate: Observable<any>
+  constructor(private dialogRef: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.currentFormattedDate = this.data;
+  }
+  ngOnInit() {
+  }
+}
 
 

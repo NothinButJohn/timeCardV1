@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material.module";
 import { WeeklyComponent } from './components/weekly/weekly.component';
-import { DailyComponent } from './components/daily/daily.component';
+import {AddToCurrentDayDialog, DailyComponent} from './components/daily/daily.component';
 
 
 
@@ -14,7 +14,9 @@ import { DailyComponent } from './components/daily/daily.component';
   declarations: [
     AppComponent,
     WeeklyComponent,
-    DailyComponent
+    DailyComponent,
+    AddToCurrentDayDialog,
+
   ],
   imports: [
     BrowserModule,

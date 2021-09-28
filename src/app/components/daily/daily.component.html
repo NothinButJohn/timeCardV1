@@ -20,33 +20,47 @@
 
 
   <div class="clocked-time-information">
-    <span>Today's Shifts</span>
+    <span class="daily-shifts-grid-header header-font">Today's Shifts</span>
     <div class="daily-grid">
-      <div class="">Prj </div>
-      <div class="">JobCode </div>
-      <div class="">PayCode </div>
-      <div class="">In </div>
-      <div class="">Out </div>
+      <div class="project-grid-header header-font">Project</div>
+      <div class="jobCode-grid-header header-font">JobCode</div>
+      <div class="payCode-grid-header header-font">PayCode</div>
+      <div class="timeIn-grid-header header-font">In</div>
+      <div class="timeOut-grid-header header-font">Out</div>
 
       <div class="shiftDetails-container" *ngFor="let shift of shiftsMock$ | async">
       <mat-card class="shiftDetails-materialCard">
         <mat-card-content>
           <div class="shiftDetails">
-            <div>{{shift.project}}</div>
-            <div>{{shift.jobCode}}</div>
-            <div>{{shift.payCode}}</div>
-            <div>{{ shift.timeIn}}</div>
-            <div>{{shift.timeOut}}</div>
+            <div class="shift-project" *ngIf="shift.project.length < 12; else shortProjectName">{{shift.project}}</div>
+            <ng-template #shortProjectName>
+              <div class="shift-project">
+                {{shift.project.substring(0,12)}}...
+              </div>
+            </ng-template>
+
+            <div class="shift-jobCode">{{shift.jobCode}}</div>
+            <div class="shift-payCode">{{shift.payCode}}</div>
+            <div class="shift-timeIn">{{ shift.timeInFormatted}}</div>
+            <div class="shift-timeOut">{{shift.timeOutFormatted}}</div>
           </div>
         </mat-card-content>
       </mat-card>
       </div>
 
     </div>
-
-
   </div>
 
+  <div class="daily-totalHours-container">
+    <mat-card>
+      <mat-card-title>Total Hours for Tuesday the 14th</mat-card-title>
+      <mat-card-content>
+        <div>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
   <div class="bottom-mobile-toolbar">
     <div class="bottom-mobile-toolbar-half">

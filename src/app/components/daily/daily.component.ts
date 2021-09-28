@@ -1,8 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import * as dateFns from 'date-fns';
+
 import {Observable, of} from "rxjs";
 import {MatDialog, MatDialogClose, MatDialogConfig, MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {shiftsMock} from "../../data.mock";
+import {map} from "rxjs/operators";
 @Component({
   selector: 'app-daily',
   templateUrl: './daily.component.html',
@@ -14,15 +16,24 @@ export class DailyComponent implements OnInit {
 
   constructor(private matDialog: MatDialog) {
     this.currentFormattedDate = of(this.processCurrentDate());
-    console.log("current date, processed through dateFns: ", this.currentFormattedDate)
+    // console.log("current date, processed through dateFns: ", this.currentFormattedDate)
   }
 
   ngOnInit(): void {
-    let timeMock = dateFns.differenceInMinutes(shiftsMock[0].timeOut, shiftsMock[0].timeIn);
-    let td = shiftsMock[0].timeIn
-    let ft = dateFns.getHours(td)
+    console.log(this.getRelativeTimeFormattedString(shiftsMock[0].timeOut))
 
-    console.log("timeMock test", timeMock, dateFns.formatRelative(td, td))
+  }
+
+  processCurrentWeek(){
+    this.currentFormattedDate.pipe(
+      map(formattedDate => {
+        if(formattedDate.currentDayOfWeek == 0){
+
+        }else{
+          dateFns
+        }
+      })
+    )
   }
 
   processCurrentDate(){
@@ -50,6 +61,25 @@ export class DailyComponent implements OnInit {
     mdc.data = this.currentFormattedDate;
     this.matDialog.open(AddToCurrentDayDialog, mdc)
   }
+
+  getRelativeTimeFormattedString(dateInstance: Date){
+    let hours = dateFns.getHours(dateInstance);
+    let minutes = dateFns.getMinutes(dateInstance);
+    if(hours > 12){
+      return `${hours - 12}:${minutes}pm`
+    }else{
+      if(hours == 0){
+        return `${12}:${minutes}am`
+      }else{
+        return `${hours}:${minutes}am`
+      }
+    }
+  }
+
+  getTotalHoursForDay(){
+
+  }
+
 }
 
 @Component({

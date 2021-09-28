@@ -31,10 +31,33 @@
 
     .clocked-time-information{
       grid-area: 3/1/4/5;
+      .header-font{
+        font-family: 'Lato', sans-serif;
+        justify-content: center;
+        display: flex;
+      }
+      .daily-shifts-grid-header{
+        width: 100%;
+        min-width: 370px;
+        justify-content: center;
+        display: flex;
+        font-size: medium;
+        margin-bottom: 15px;
+      }
       .daily-grid{
         display: grid;
-        grid-template-columns: repeat(5, minmax(8.33%, 1fr));
+        grid-template-columns: 140px 60px 60px 40px 60px;;
+        //grid-template-columns: repeat(5, minmax(8.33%, 1fr));
         grid-template-rows: auto;
+
+        .project-grid-header{
+
+        }
+        .jobCode-grid-header{}
+        .payCode-grid-header{}
+        .timeIn-grid-header{}
+        .timeOut-grid-header{}
+
         .shiftDetails-container{
           display: flex;
           flex-direction: row;
@@ -43,17 +66,51 @@
           grid-column: 1/6;
           .shiftDetails-materialCard{
             width: 100%;
-            min-width: 370px;
+            min-width: 360px;
+            box-sizing: border-box;
+            background-color: aliceblue;
+            color: black;
+            box-shadow: 2px 2px 5px black;
+            margin-top: 5px;
+            margin-left: 5px;
+            margin-right: 10px;
             .shiftDetails{
               display: flex;
               flex-direction: row;
               width: 100%;
+              .shift-project{
+                min-width: 125px;
+                width: 100%;
+              }
+              .shift-jobCode{
+                min-width: 60px;
+                width: 100%;
+              }
+              .shift-payCode{
+                min-width: 60px;
+                width: 100%;
+              }
+              .shift-timeIn{
+                min-width: 50px;
+                width: 100%;
+              }
+              .shift-timeOut{
+                min-width: 50px;
+                width: 100%;
+              }
+
             }
           }
         }
 
       }
     }
+
+    .daily-totalHours-container{
+      grid-area: 4/1/6/5;
+    }
+
+
    .bottom-mobile-toolbar{
      grid-area: 6/1/7/5;
      display: grid;

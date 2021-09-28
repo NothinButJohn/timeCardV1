@@ -3,12 +3,14 @@
 
 export const shiftsMock = [
   {
-    project: 'Warehouse',
+    project: 'Warehouse test this one is a long project',
     jobCode: '1022',
     payCode: 'N',
     timeIn: new Date("Tue Jul 13 2021 20:55:55 GMT-0500"),
+    timeInFormatted: '8:55pm',
     timeOut: new Date("Tue Jul 14 2021 05:55:55 GMT-0500"),
-    description: 'scrape ,primer, area set up and take down for operational during day',
+    timeOutFormatted: '5:55am',
+    description: 'scrape ,primer, paint doors, area set up, tape and take down for operational during day',
     totalHours: 8
   },
   {

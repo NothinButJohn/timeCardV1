@@ -28,10 +28,19 @@
       <div class="">In </div>
       <div class="">Out </div>
 
-      <mat-card>
+      <div class="shiftDetails-container" *ngFor="let shift of shiftsMock$ | async">
+      <mat-card class="shiftDetails-materialCard">
         <mat-card-content>
+          <div class="shiftDetails">
+            <div>{{shift.project}}</div>
+            <div>{{shift.jobCode}}</div>
+            <div>{{shift.payCode}}</div>
+            <div>{{ shift.timeIn}}</div>
+            <div>{{shift.timeOut}}</div>
+          </div>
         </mat-card-content>
       </mat-card>
+      </div>
 
     </div>
 

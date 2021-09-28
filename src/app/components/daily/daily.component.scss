@@ -35,6 +35,23 @@
         display: grid;
         grid-template-columns: repeat(5, minmax(8.33%, 1fr));
         grid-template-rows: auto;
+        .shiftDetails-container{
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          min-width: 370px;
+          grid-column: 1/6;
+          .shiftDetails-materialCard{
+            width: 100%;
+            min-width: 370px;
+            .shiftDetails{
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+            }
+          }
+        }
+
       }
     }
    .bottom-mobile-toolbar{

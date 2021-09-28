@@ -10,12 +10,19 @@ import {shiftsMock} from "../../data.mock";
 })
 export class DailyComponent implements OnInit {
   currentFormattedDate: Observable<any>;
+  shiftsMock$: Observable<any> = of(shiftsMock);
+
   constructor(private matDialog: MatDialog) {
     this.currentFormattedDate = of(this.processCurrentDate());
     console.log("current date, processed through dateFns: ", this.currentFormattedDate)
   }
 
   ngOnInit(): void {
+    let timeMock = dateFns.differenceInMinutes(shiftsMock[0].timeOut, shiftsMock[0].timeIn);
+    let td = shiftsMock[0].timeIn
+    let ft = dateFns.getHours(td)
+
+    console.log("timeMock test", timeMock, dateFns.formatRelative(td, td))
   }
 
   processCurrentDate(){
@@ -52,12 +59,12 @@ export class DailyComponent implements OnInit {
 })
 export class AddToCurrentDayDialog implements OnInit {
   currentFormattedDate: Observable<any>
+  paycodes = ['OT', 'N']
   constructor(private dialogRef: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.currentFormattedDate = this.data;
   }
   ngOnInit() {
-    let timeMock = dateFns.differenceInMinutes(shiftsMock[0].timeIn, shiftsMock[0].timeOut);
-    console.log("timeMock test", timeMock)
+
   }
 }
 

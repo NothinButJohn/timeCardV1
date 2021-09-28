@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import * as dateFns from 'date-fns';
 import {Observable, of} from "rxjs";
 import {MatDialog, MatDialogClose, MatDialogConfig, MAT_DIALOG_DATA} from "@angular/material/dialog";
-
+import {shiftsMock} from "../../data.mock";
 @Component({
   selector: 'app-daily',
   templateUrl: './daily.component.html',
@@ -56,6 +56,8 @@ export class AddToCurrentDayDialog implements OnInit {
     this.currentFormattedDate = this.data;
   }
   ngOnInit() {
+    let timeMock = dateFns.differenceInMinutes(shiftsMock[0].timeIn, shiftsMock[0].timeOut);
+    console.log("timeMock test", timeMock)
   }
 }
 

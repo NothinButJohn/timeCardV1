@@ -17,7 +17,9 @@
 
   </div>
 
-
+  <div *ngFor="let data of weeklyData$ | async">
+    {{data.project}}
+  </div>
 
   <div class="clocked-time-information">
     <span class="daily-shifts-grid-header header-font">Today's Shifts</span>

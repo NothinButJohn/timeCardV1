@@ -11,11 +11,30 @@
       </div>
 
       <div *ngIf="currentFormattedDate | async as date" class="formatted-date">
-        {{date.currentMonth}}/{{date.dateOfMonth}}/{{date.currentYear}}
+        Week of {{date.currentMonth}}/{{date.dateOfMonth}}/{{date.currentYear}}
+      </div>
+    </div>
+  </div>
+
+<!--  Selected Week Overview -->
+  <div class="week-overview-container">
+    <div class="week-overview-dayHeaders">
+      <div *ngFor="let day of weekOverview$ | async" class="wodh-header">
+        <span class="dayOfWeek">{{day.day}}</span> <span class="formattedDate">({{day.dateFormatted.slice(0, 5)}})</span>
+      </div>
+    </div>
+
+    <div class="week-overview-day-totalHours">
+      <div *ngFor="let day of weekOverview$ | async" class="woth-hours">
+        <div >{{day.totalHours}}</div>
       </div>
     </div>
 
   </div>
+
+
+
+<!--  Selected Day Shifts Expanded View -->
 
   <div *ngFor="let data of weeklyData$ | async">
     {{data.project}}

@@ -11,16 +11,18 @@ import {concatMap, map} from "rxjs/operators";
   styleUrls: ['./daily.component.scss']
 })
 export class DailyComponent implements OnInit {
+  selectedDate$ = of(new Date("Tue Jul 13 2021"))
   currentFormattedDate: Observable<any>;
   shiftsMock$: Observable<any> = of(shiftsMock);
   shiftsMock2$: Observable<any> = of(shiftsMock2);
   startOfWeekDate$: Observable<any> = new Observable<any>();
-
   weeklyData$: Observable<any> = new Observable<any>()
-
+  weekOverview$: Observable<any> = new Observable<any>();
   constructor(private matDialog: MatDialog) {
     this.currentFormattedDate = of(this.processCurrentDate());
     // console.log("current date, processed through dateFns: ", this.currentFormattedDate)
+    this.selectedDate$.subscribe(x => (console.log('selectedDate: ', x)))
+
   }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class DailyComponent implements OnInit {
     if(this.currentFormattedDate == null){}else{
       this.startOfWeekDate$ = this.getStartOfWeek();
       this.weeklyData$ = this.processShiftData(this.shiftsMock2$)
+      this.weekOverview$ = this.initWeek();
     }
 
   }
@@ -35,15 +38,63 @@ export class DailyComponent implements OnInit {
   getStartOfWeek(): Observable<any>{
     return this.currentFormattedDate.pipe(
       map(formattedDate => {
-        console.log(formattedDate)
+        // console.log(formattedDate)
         let startOfWeek: any;
         if(formattedDate.currentDayOfWeek == 0){
           startOfWeek = formattedDate.currentDate;
         }else{
           startOfWeek = dateFns.previousSunday(formattedDate.currentDate)
         }
-        console.log(startOfWeek)
+        console.log('start of week: ',startOfWeek)
         return startOfWeek;
+      })
+    )
+  }
+
+  initWeek(): Observable<any> {
+    return this.startOfWeekDate$.pipe(
+      map((sunday) => {
+        let week = [
+          {
+            day: 'sunday',
+            date: sunday,
+            totalHours: 0,
+            dateFormatted: dateFns.lightFormat(sunday, 'MM-dd-yyyy')
+          },          {
+            day: 'monday',
+            date: dateFns.addDays(sunday, 1),
+            totalHours: 0,
+            dateFormatted: dateFns.lightFormat(dateFns.addDays(sunday, 1), 'MM-dd-yyyy')
+          },          {
+            day: 'tuesday',
+            date: dateFns.addDays(sunday, 2),
+            totalHours: 0,
+            dateFormatted: dateFns.lightFormat(dateFns.addDays(sunday, 2), 'MM-dd-yyyy')
+          },          {
+            day: 'wednesday',
+            date: dateFns.addDays(sunday, 3),
+            totalHours: 0,
+            dateFormatted: dateFns.lightFormat(dateFns.addDays(sunday, 3), 'MM-dd-yyyy')
+          },          {
+            day: 'thursday',
+            date: dateFns.addDays(sunday, 4),
+            totalHours: 0,
+            dateFormatted: dateFns.lightFormat(dateFns.addDays(sunday, 4), 'MM-dd-yyyy')
+          },          {
+            day: 'friday',
+            date: dateFns.addDays(sunday, 5),
+            totalHours: 0,
+            dateFormatted: dateFns.lightFormat(dateFns.addDays(sunday, 5), 'MM-dd-yyyy')
+          },          {
+            day: 'saturday',
+            date: dateFns.addDays(sunday, 6),
+            totalHours: 0,
+            dateFormatted: dateFns.lightFormat(dateFns.addDays(sunday, 6), 'MM-dd-yyyy')
+          },
+
+        ]
+        console.log('weekInit: ', week)
+        return week;
       })
     )
   }
@@ -58,7 +109,7 @@ export class DailyComponent implements OnInit {
           let month = dateFns.getMonth(date)
           let day = dateFns.getDate(date)
           let year = dateFns.getYear(date)
-          console.log(month)
+          console.log('datefns lightformat()',dateFns.lightFormat(date, 'MM-dd-yyyy'))
           weekDatesKeyFormat.push(dateFns.lightFormat(date, 'MM-dd-yyyy'));
         })
         console.log(weekDatesKeyFormat)
@@ -66,7 +117,11 @@ export class DailyComponent implements OnInit {
           map((shiftsObject: any) => {
             let shiftsInInterval: any[] = [];
             weekDatesKeyFormat.forEach((dateKey) => {
-              shiftsInInterval = [...shiftsInInterval ,shiftsObject.dateKey]
+              // let shiftCopy = JSON.stringify(shiftsObject.dateKey);
+              if(shiftsObject[dateKey] !== undefined){
+                shiftsInInterval = [...shiftsInInterval ,shiftsObject[dateKey]]
+              }
+
             })
             console.log(shiftsInInterval)
             return shiftsInInterval;
